@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>KaFaa OrderCoffee</title>
+		<meta name="description" content="A page transition where one SVG path is morphed into another" />
+		<meta name="keywords" content="page transition, svg, morph, path, javascript, web design, web dev" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="https://fonts.googleapis.com/css?family=Nunito:400,700|Fugaz+One" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="pater/pater.css" />
+		<script>document.documentElement.className = 'js';</script>
+	</head>
+	<style id="webmakerstyle">
+		
+
+	  a {
+            cursor: pointer;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: auto;
+        }
+
+        .menu {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+        .button {
+            width: 200px;
+            height: 200px;
+            -webkit-transition: .2s all ease-in-out;
+            transition: .2s all ease-in-out;
+            color: #fff;
+            font-size: 2.5em;
+            overflow: hidden;
+            border-radius: 10px;
+            background-size: cover !important;
+            background-position: center !important;
+            margin: 20px auto;
+        }
+
+            .button::before {
+                content: "";
+                display: block;
+                background: rgba(0, 0, 0, 0.4);
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                border-radius: 10px;
+                -webkit-transition: .3s all ease;
+                transition: .3s all ease;
+            }
+
+            .button:hover::before {
+                background: rgba(0, 0, 0, 0.1);
+            }
+
+            .button a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 470%;
+                -webkit-transition: .3s all ease;
+                transition: .3s all ease;
+                position: absolute;
+                z-index: 2;
+            }
+
+                .button a:hover {
+                    line-height: 400%;
+                }
+
+        #choicecoffee,
+        #coffee {
+            background: url("http://fb1-cl.lnwfile.com/_/cl/_raw/99/60/qz.jpg");
+        }
+
+        #choicetea {
+            background: url("https://goohiw.com/wp-content/uploads/2015/11/sweet-a-holic-featured-1140x630.jpg");
+        }
+
+        #coffeemenu {
+            display: none;
+        }
+
+        #teamenu {
+            display: none;
+        }
+
+        #caffelatte {
+            background: url("https://www.chemipan.com/home/images/stories/virtuemart/product/%E0%B8%81%E0%B8%A5%E0%B8%B4%E0%B9%88%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B9%81%E0%B8%9F.jpg");
+        }
+
+        #cappuccino {
+            background: url("https://steemit-production-imageproxy-upload.s3.amazonaws.com/DQmNt1GiLBtx8JFs9n4g13HnfPdBHppX5zNQzyCfXdDnXEd");
+        }
+
+        #espresso {
+            background: url("http://4.bp.blogspot.com/-eq_FGPNIjH4/Unci-7k8ZhI/AAAAAAAAAEk/SQYJQDXmJ1Y/s1600/%E0%B9%80%E0%B8%AD%E0%B8%AA%E0%B9%80%E0%B8%9E%E0%B8%A3%E0%B8%AA%E0%B9%82%E0%B8%8B%E0%B9%88.JPG");
+        }
+
+        #earlgrey {
+            background: url("https://f.ptcdn.info/078/052/000/os5fadnb8UIYqYee6Ke-o.jpg");
+        }
+    #earlgrey1 {
+        background: url("http://www.yamyen.com/wp-content/uploads/2017/07/Honey-Toast.jpg"); 
+
+    }
+    #earlgrey2 { background: url("http://ipattaya.co/wp-content/uploads/2015/12/%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%9A%E0%B8%B4%E0%B8%87%E0%B8%8B%E0%B8%B9%E0%B8%9E%E0%B8%B1%E0%B8%97%E0%B8%A2%E0%B8%B2-Jungle-Snow12.jpg"); }
+
+        #greentea {
+            background: url("https://f.ptcdn.info/286/025/000/1415282993-6d1f45732a-o.jpg");
+        }
+
+        #minttea {
+            background: url("http://www.ryoiireview.com/upload/article/201609/1474014380_ac1aa4ee503244145acab54d6d46eb72.jpg");
+        }
+
+        #screen {
+            display: none;
+            width: 100%;
+            min-height: 100px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            font-size: 4.5em;
+            margin: auto;
+            border-radius: 10px 10px 0 0;
+            padding: 20px;
+        }
+
+        #drinkmenu {
+            display: none;
+            width: 100%;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 0 0 10px 10px;
+            padding: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        #strength,
+        #sugar,
+        #milk {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-flow: column;
+            flex-flow: column;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #lessstrength,
+        #lesssugar,
+        #lessmilk {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+            visibility: hidden;
+        }
+
+        #lessstrength,
+        #morestrength,
+        #lesssugar,
+        #moresugar,
+        #lessmilk,
+        #moremilk {
+            height: 42px;
+            font-size: 1.5em;
+            padding: 0 10px;
+            color: saddlebrown;
+        }
+
+            #lessstrength:hover,
+            #morestrength:hover,
+            #lesssugar:hover,
+            #moresugar:hover,
+            #lessmilk:hover,
+            #moremilk:hover {
+                cursor: pointer;
+            }
+
+        .setting {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            height: 40px;
+            line-height: 12px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        #order {
+            display: block;
+            background: -webkit-linear-gradient(right, #ee0979, #ff6a00);
+            background: linear-gradient(to left, #ee0979, #ff6a00);
+            width: 250px;
+            height: 100px;
+            border-radius: 50px;
+            position: relative;
+            top: 10px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+            #order:hover {
+                cursor: pointer;
+            }
+
+            #order p {
+                text-align: center;
+                color: #fff;
+                font-size: 1.5em;
+                line-height: 70px;
+                margin: 0 auto;
+            }
+    </style>
+	<body class="demo-2 loading">
+		
+		<main>
+			<div class="content content--intro">
+				
+				<div class="content__inner">
+					<h2 class="content__title">KaFaa</h2>
+					<h3 class="content__subtitle">สั่งออเดอร์ร้านกาแฟ</h3>
+					<a href="#" class="enter">สั่งเลย</a>
+					
+				</div>
+				<div class="shape-wrap">
+					<svg class="shape" width="100%" height="100vh" preserveAspectRatio="none" viewBox="0 0 1440 800" xmlns:pathdata="http://www.codrops.com/">
+						<path d="M -65.11,-1.008 C -38.79,8.492 -48.8,43.89 -24.09,59.91 -17.38,64.25 -7.411,68.1 2.397,67.74 19.94,67.09 30.89,61.16 46.62,50.39 64.99,37.82 92.16,36.57 112.8,41.49 141.9,48.44 153.5,80.16 178.5,78.34 194.6,77.17 205.3,67.96 216.8,48.87 224.6,35.89 230.6,20.21 251.4,19.41 278.8,18.35 288.2,28.98 298.5,67.48 303.6,86.48 308.2,97.24 316.3,102.6 329.4,111.3 340.7,106 350.5,100.2 377.5,84.13 369.6,23.41 401.2,20.7 415.9,19.43 431.7,33.86 449.9,57.07 462.7,73.41 475.5,91.96 494.9,96.72 503.8,98.9 513,97.38 521.6,90.13 532.1,81.21 532.2,62.36 551.7,62.17 565.7,62.03 569.6,72.01 575.9,89 580.5,101.3 598.1,139.1 628.6,117.5 649.1,103 641.6,81.95 658,80.67 674.4,79.39 692.2,136.3 720.8,141.4 738.9,144.6 763.5,132 771.2,119.3 782.1,101.2 783.6,81.7 799.1,81.97 829.3,82.49 818.2,122.8 838.2,143.8 858.1,164.8 875.7,158.9 886.4,155.8 910.4,149 913.1,122.8 939.2,119.6 953.9,117.9 964.8,130.2 979.7,131.6 997.3,133.3 1016,132.6 1027,121 1038,109.3 1038,80.15 1054,79.92 1071,79.67 1073,89.94 1079,106.8 1084,119.5 1089,133.9 1101,141.1 1111,147.3 1124,146.3 1136,145 1150,143.4 1160,132.7 1177,130.8 1194,128.8 1219,128.2 1236,138.8 1257,151.6 1271,147.7 1280,137.3 1291,124.1 1294,92.34 1316,90.47 1344,88.04 1348,163.9 1380,183.1 1401,195.1 1428,196.6 1451,190.6 1478,183.7 1503,161.8 1518,143 1544,109.1 1550,43.89 1551,32.49 1568,-303.4 -510,-224.1 -65.11,-1.008 Z" pathdata:id="M -35.73,45.41 C -9.412,61.01 -30.93,379.4 -17.31,545.8 -12.26,607.5 -54.94,740.4 6.142,730.1 63.67,720.4 26.97,284.9 27.01,202.3 27.06,104.3 51.66,29.07 106,54.36 160.3,79.65 103.7,491.7 187.7,465.7 231.9,452 156.6,99.89 249.4,94.08 285.7,91.81 299.9,127.5 305,190.9 316,327.7 328.6,462.6 321.1,598.3 315.8,695.4 294.5,776.7 353.9,773.6 415.6,770.4 379.8,650.7 368.7,588.8 337.4,415 369.6,190.1 391.1,111 412.5,31.92 457,96.83 463.3,127.2 480.9,212.1 493.9,307.8 489,396.1 487.4,425.7 482.1,460.1 517.1,455.2 548.5,450.7 476.2,166 550.9,168.9 594.8,170.6 591.6,626.8 586.3,663.5 578.4,717.8 609.1,742.4 633.9,700.6 651.9,670.2 578.3,209.7 650.8,194.1 723.2,178.5 700.8,277.9 687.6,401.1 680.2,470 766.1,486.3 756,414.3 750.3,373.5 703.1,145.6 793.4,146.1 939.9,146.8 846.2,556.8 844,601.8 841.9,646.8 878.6,682.8 903.3,630.6 928,578.4 863.2,264.8 891.7,178.8 920.2,92.81 997.3,215.6 972,292.8 946.6,370 1030,353.1 999,295.7 985.9,271.6 977.1,119.1 1048,117.8 1119,116.5 1127,634.6 1123,682.6 1119,730.6 1110,749.8 1118,771.3 1134,815.5 1173,803.5 1164,734 1155,664.5 1139,665.8 1143,418.4 1148,170.9 1225,122 1240,215 1249,273 1202,413 1282,391.7 1324,380.7 1280,165.5 1316,159.6 1362,152 1296,358.2 1379,361.2 1462,364.2 1312,753 1444,751.2 1592,749.2 1484,458.5 1505,312.2 1518,221.3 1544,58.44 1545,39.57 1562,-514.4 -480.6,-322.6 -35.73,45.41 Z"></path>
+					</svg>
+				</div>
+			</div><!-- /content -->
+			<div class="content content--fixed">
+				<div class="content__inner">
+					<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Pattaya" rel="stylesheet">
+        <body>
+            <div class="container">
+                <div id="mainmenu" class="menu">
+                    <div id="choicecoffee" class="button animated bounceIn">
+                        <a>เครื่องดื่ม</a>
+                    </div>
+                    <div id="choicetea" class="button animated bounceIn"><a>ของหวาน</a></div>
+                </div>
+                <div id="coffeemenu" class="menu">
+                    <div id="coffee" class="button animated bounceIn drink"><a>กาแฟ</a></div>
+                    <div id="caffelatte" class="button animated bounceIn drink"><a>ลาเต้</a></div>
+                    <div id="cappuccino" class="button animated bounceIn drink"><a>คาปูชิโน</a></div>
+                    <div id="espresso" class="button animated bounceIn drink"><a>เอสเปรสโซ่</a></div>
+                </div>
+                <div id="teamenu" class="menu">
+                    <div id="earlgrey" class="button animated bounceIn drink"><a>เค้กมะพร้าวอ่อน</a></div>
+                    <div id="greentea" class="button animated bounceIn drink"><a>เครปเค้ก</a></div>
+                    <div id="minttea" class="button animated bounceIn drink"><a>บราวนี่</a></div>
+                    <div id="earlgrey1" class="button animated bounceIn drink"><a>ฮันนีโทส</a></div>
+                    <div id="earlgrey2" class="button animated bounceIn drink"><a>บิงชู</a></div>
+                </div>
+                <p id="screen" class="menu animated slideInUp"></p>
+                <div id="drinkmenu" class="menu animated fadeIn">
+                    <div id="strength">
+                        <em>ความเข้ม</em>
+                        <div class="setting">
+                            <div id="lessstrength">&#10151;</div>
+                            <div id="displaystrength">normal</div>
+                            <div id="morestrength">&#10151;</div>
+                        </div>
+                    </div>
+                    
+                    <div id="sugar">
+                        <em>น้ำตาล</em>
+                        <div class="setting">
+                            <div id="lesssugar">&#10151;</div>
+                            <div id="displaysugar">no</div>
+                            <div id="moresugar">&#10151;</div>
+                        </div>
+                    </div>
+                    <div id="milk">
+                        <em>นม</em>
+                        <div class="setting">
+                            <div id="lessmilk">&#10151;</div>
+                            <div id="displaymilk">no</div>
+                            <div id="moremilk">&#10151;</div>
+                        </div>
+                    </div>
+                    <div id="order" class="animated fadeInDown">
+                        <p>Order
+                        
+                       </p>
+                    </div>
+                </div>
+            </div>
+        </body>
+</html>
+				</div>
+			</div>
+			<script src="js/imagesloaded.pkgd.min.js"></script>
+			<script src="js/charming.min.js"></script>
+			<script src="js/anime.min.js"></script>
+			<script src="js/demo2.js"></script>
+		</main>
+		<script>
+// Declare the variables of the menus
+var mainmenu = document.getElementById("mainmenu");
+var coffeemenu = document.getElementById("coffeemenu");
+var teamenu = document.getElementById("teamenu");
+var drinkmenu = document.getElementById("drinkmenu");
+
+// And the submenu when a drink is selected
+var screen = document.getElementById("screen");
+
+var displaystrength = document.getElementById("displaystrength");
+var morestrength = document.getElementById("morestrength");
+var lessstrength = document.getElementById("lessstrength");
+
+var displaysugar = document.getElementById("displaysugar");
+var moresugar = document.getElementById("moresugar");
+var lesssugar = document.getElementById("lesssugar");
+
+var displaymilk = document.getElementById("displaymilk");
+var moremilk = document.getElementById("moremilk");
+var lessmilk = document.getElementById("lessmilk");
+
+// The feedback after the Order button is pressed
+var drinkorder = document.getElementById("screen");
+var strengthorder = document.getElementById("displaystrength");
+var sugarorder = document.getElementById("displaysugar");
+var milkorder = document.getElementById("displaymilk");
+
+// If the user chooses coffee in the main menu show the coffee submenu
+choicecoffee.addEventListener(
+  "click",
+  function() {
+    mainmenu.style.display = "none";
+    coffeemenu.style.display = "flex";
+  },
+  false
+);
+
+// If the user chooses tea in the main menu show the tea submenu
+choicetea.addEventListener(
+  "click",
+  function() {
+    mainmenu.style.display = "none";
+    teamenu.style.display = "flex";
+  },
+  false
+);
+
+// If the user selects a drink from the coffee menu show the drink's submenu
+coffee.addEventListener(
+  "click",
+  function() {
+    coffeemenu.style.display = "none";
+    teamenu.style.display = "none";
+    drinkmenu.style.display = "flex";
+    screen.innerHTML = "coffee";
+    screen.style.background =
+      "url('http://www.livescience.com/images/i/000/052/689/original/coffee-cup-120516.jpg')";
+    screen.style.display = "flex";
+  },
+  false
+);
+
+caffelatte.addEventListener(
+  "click",
+  function() {
+    coffeemenu.style.display = "none";
+    teamenu.style.display = "none";
+    drinkmenu.style.display = "flex";
+    screen.innerHTML = "Caffè latte";
+    screen.style.background =
+      "url('https://www.chemipan.com/home/images/stories/virtuemart/product/%E0%B8%81%E0%B8%A5%E0%B8%B4%E0%B9%88%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B9%81%E0%B8%9F.jpg')";
+    screen.style.display = "flex";
+  },
+  false
+);
+
+cappuccino.addEventListener(
+  "click",
+  function() {
+    coffeemenu.style.display = "none";
+    teamenu.style.display = "none";
+    drinkmenu.style.display = "flex";
+    screen.innerHTML = "Cappuccino";
+    screen.style.background =
+      "url('http://xn--72c9cmoj4abc1r.com/wp-content/uploads/2014/09/Cappuccino1.jpg')";
+    screen.style.display = "flex";
+  },
+  false
+);
+
+espresso.addEventListener(
+  "click",
+  function() {
+    coffeemenu.style.display = "none";
+    teamenu.style.display = "none";
+    drinkmenu.style.display = "flex";
+    screen.innerHTML = "Espresso";
+    screen.style.background =
+      "url('http://www.sainampingcoffee.com/WEB/Articles/espresso-main_Full.jpg')";
+    screen.style.display = "flex";
+  },
+  false
+);
+
+// If the user selects a drink from the tea menu show the drink's submenu
+
+// The user can change settings like the strength of the drink and the ability to add sugar and/or milk
+morestrength.addEventListener(
+  "click",
+  function() {
+    displaystrength.innerHTML = "strong";
+    morestrength.style.visibility = "hidden";
+    lessstrength.style.visibility = "initial";
+  },
+  false
+);
+
+lessstrength.addEventListener(
+  "click",
+  function() {
+    displaystrength.innerHTML = "normal";
+    morestrength.style.visibility = "initial";
+    lessstrength.style.visibility = "hidden";
+  },
+  false
+);
+
+moresugar.addEventListener(
+  "click",
+  function() {
+    displaysugar.innerHTML = "yes";
+    moresugar.style.visibility = "hidden";
+    lesssugar.style.visibility = "initial";
+  },
+  false
+);
+
+lesssugar.addEventListener(
+  "click",
+  function() {
+    displaysugar.innerHTML = "no";
+    moresugar.style.visibility = "initial";
+    lesssugar.style.visibility = "hidden";
+  },
+  false
+);
+
+moremilk.addEventListener(
+  "click",
+  function() {
+    displaymilk.innerHTML = "yes";
+    moremilk.style.visibility = "hidden";
+    lessmilk.style.visibility = "initial";
+  },
+  false
+);
+
+lessmilk.addEventListener(
+  "click",
+  function() {
+    displaymilk.innerHTML = "no";
+    moremilk.style.visibility = "initial";
+    lessmilk.style.visibility = "hidden";
+  },
+  false
+);
+
+// The user presses the Order button when finished and gets feedback that the order is understood
+order.addEventListener(
+  "click",
+  function() {
+    if (
+      strengthorder.innerHTML === "strong" &&
+      sugarorder.innerHTML === "yes" &&
+      milkorder.innerHTML === "yes"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        strengthorder.innerHTML +
+        "  " +
+        drinkorder.innerHTML.toLowerCase() +
+        " with milk and sugar coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "strong" &&
+      sugarorder.innerHTML === "no" &&
+      milkorder.innerHTML === "yes"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        strengthorder.innerHTML +
+        "  " +
+        drinkorder.innerHTML.toLowerCase() +
+        " with milk coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "strong" &&
+      sugarorder.innerHTML === "yes" &&
+      milkorder.innerHTML === "no"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        strengthorder.innerHTML +
+        "  " +
+        drinkorder.innerHTML.toLowerCase() +
+        " with sugar coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "strong" &&
+      sugarorder.innerHTML === "no" &&
+      milkorder.innerHTML === "no"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        strengthorder.innerHTML +
+        "  " +
+        drinkorder.innerHTML.toLowerCase() +
+        " coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "normal" &&
+      sugarorder.innerHTML === "yes" &&
+      milkorder.innerHTML === "yes"
+    ) {
+      drinkmenu.innerHTML =
+        "One " +
+        drinkorder.innerHTML.toLowerCase() +
+        "  with milk and sugar coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "normal" &&
+      sugarorder.innerHTML === "no" &&
+      milkorder.innerHTML === "yes"
+    ) {
+      drinkmenu.innerHTML =
+        "One " + drinkorder.innerHTML.toLowerCase() + " with milk coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "normal" &&
+      sugarorder.innerHTML === "yes" &&
+      milkorder.innerHTML === "no"
+    ) {
+      drinkmenu.innerHTML =
+        "One " + drinkorder.innerHTML.toLowerCase() + " with sugar coming up!";
+    }
+    if (
+      strengthorder.innerHTML === "normal" &&
+      sugarorder.innerHTML === "no" &&
+      milkorder.innerHTML === "no"
+    ) {
+      drinkmenu.innerHTML =
+        "One " + drinkorder.innerHTML.toLowerCase() + " coming up!";
+    }
+  },
+  false
+);
+
+//# sourceURL=userscript.js
+</script>
+	</body>
+</html>
