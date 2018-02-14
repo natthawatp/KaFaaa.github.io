@@ -244,7 +244,7 @@ input {
             background: -webkit-linear-gradient(right, #ee0979, #ff6a00);
             background: linear-gradient(to left, #ee0979, #ff6a00);
             width: 150px;
-            height: 80px;
+            height: 70px;
             border-radius: 50px;
             position: relative;
             top: 10px;
@@ -263,6 +263,14 @@ input {
                 line-height: 70px;
                 margin: 0 auto;
             }
+   .jumbotron {
+            padding: 30px;
+        }
+
+        .text-giant {
+            font-size: 40px;
+        }
+
     </style>
 	<body class="demo-2 loading">
 		
@@ -310,26 +318,41 @@ input {
                 </div>
                 <p id="screen" class="menu animated slideInUp"></p>
                 <div id="drinkmenu" class="menu animated fadeIn">
-                        
-                                        <form>
-                                                <p><label for="quantity">ราคาแก้วละ</label></p>
-                                          <p><input type="text" name="price" value="30" readonly></p>
-                                      
-                                          <p><label for="quantity">จำนวนแก้ว</label></p>
-                                          <p><input type="number" name="quantity" value="1" min="1" max="10" step="1"></p>
-                                          <div>
-                                                <p><label for="quantity">ราคารวม</label></p>
-                                                <div class="price-replace"></div>
-                                        </div>
-                                        </form>
-                                        
-                                
-                                
-                                     
-                                
-                                
-                              
-                              </div>
+
+
+                    <div class="jumbotron text-center">
+
+                        <form>
+                            <div class="form-group">
+                                <label for="price">ราคาแก้วละ</label>
+                                <br />
+                                <input type="text" class="form-control" name="price" value="                       30" readonly>
+                            </div>
+                            <br />
+
+                            <div class="form-group">
+                                <label for="quantity" class="form-group">จำนวน <span class="label label-primary quantity-label">1</span>  แก้ว</label>
+                                <br />
+                                <input type="range" class="form-control" name="quantity" value="1" min="1" max="10" step="1">
+                            </div>
+                        </form>
+                       
+                        <label>ราคารวม</label>
+                        <div class="text-right text-giant total">
+
+                        </div>
+                    </div>
+                    <div id="order" class="animated fadeInDown">
+                        <p>สั่งเลย</p>
+                    </div>
+
+
+
+
+
+
+
+                </div>
                     
                     </div>
                 </div>
@@ -344,25 +367,32 @@ input {
 			<script src="js/demo2.js"></script>
 		</main>
 		<script>
+            //Grab Everyting
             const priceInput = document.querySelector('[name=price]');
-const quantityInput = document.querySelector('[name=quantity]');
-const total = document.querySelector('.price-replace');
+            const quantityInput = document.querySelector('[name=quantity]');
+            const total = document.querySelector('.total');
+            const quantityLabel = document.querySelector('.quantity-label');
 
-// create the function that we'll need
-function calculatePriceCost() {
-  const price    = priceInput.value;
-  const quantity = quantityInput.value;
-  const cost     = price * quantity;
-  console.log(cost);
-  total.innerText =  cost  +'บาท';
-}
+            //Functions
+            function calculatePieCost() {
+                const price = priceInput.value;
+                const quantity = quantityInput.value;
+                const cost = price * quantity;
+                total.innerText =  cost + '  ' + 'บาท';
+            }
 
-// on first run
-calculatePriceCost();
+            function updateQuantityLabel() {
+                const quantity = quantityInput.value;
+                quantityLabel.innerText = quantity;
+            }
 
-// add our event listeners
-priceInput.addEventListener('input', calculatePriceCost);
-quantityInput.addEventListener('input', calculatePriceCost);
+            //Calculate Price On First Run
+            calculatePieCost();
+
+            //Event Listeners
+            priceInput.addEventListener('input', calculatePieCost);
+            quantityInput.addEventListener('input', calculatePieCost);
+            quantityInput.addEventListener('input', updateQuantityLabel);
 //# sourceURL=userscript.js
 // Declare the variables of the menus
 var mainmenu = document.getElementById("mainmenu");
