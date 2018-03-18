@@ -140,7 +140,7 @@ input {
         }
 
         #espresso {
-            background: url("img/es.jpg");
+            background: url("img/es.JPG");
         }
 
         #earlgrey {
@@ -400,126 +400,7 @@ input[type=range]::-moz-range-thumb:active {
   }
 
 
-  }
-  body {
-    text-align: center;
-    background-color: rgb(58, 34, 4);
-    }
-  body:before {
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-    height: 100%;
-    }
-
-h2 {
-  display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
-  font-size: 12em;
-  text-shadow: .03em .03em 0 rgb(58, 34, 4);
-  }
-  h2:after {
-    content: attr(data-shadow);
-    position: absolute;
-    top: .06em; left: .06em;
-    z-index: -1;
-    text-shadow: none;
-    background-image:
-      linear-gradient(
-        45deg,
-        transparent 45%,
-        hsla(48,20%,90%,1) 45%,
-        hsla(48,20%,90%,1) 55%,
-        transparent 0
-        );
-    background-size: .05em .05em;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    animation: shad-anim 15s linear infinite;
-    }
-
-@keyframes shad-anim {
-  0% {background-position: 0 0}
-  0% {background-position: 100% -100%}
-  }
-
-  .reveal-text,
-.reveal-text::after {
-	animation-delay: var(--animation-delay);
-	animation-iteration-count: var(--iterations);
-	animation-duration: var(--duration);
-	animation-fill-mode: both;
-	animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
-}
-
-.reveal-text {
-	position: relative;
-	font-size: 20vw;
-	display: block;
-	user-select: none;
-	animation-name: reveal-text;
-	color: #f4f4cd;
-	white-space: nowrap;
-	cursor: default;
-
-	&::after {
-		content: "";
-		position: absolute;
-		z-index: 999;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: #f2f98b;
-		transform: scaleX(0);
-		transform-origin: 0 50%;
-		pointer-events: none;
-		animation-name: revealer-text;
-	}
-
-}
-@use postcss-cssnext;
-
-/* ••·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•· */
-:root {
-	--animation-delay: 2s;
-	--duration: 800ms;
-	--iterations: 1;
-}
-/* ••·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•· */
-
-@keyframes reveal-text {
-	from {
-		clip-path: inset(0 100% 0 0);
-	}
-	to {
-		clip-path: inset(0 0 0 0);
-	}
-}
-
-
-@keyframes revealer-text {
-
-	0%, 50% {
-		transform-origin: 0 50%;
-	}
-
-	60%, 100% {
-		transform-origin: 100% 50%;
-	}
-
-
-	60% {
-		transform: scaleX(1);
-	}
-
-	100% {
-		transform: scaleX(0);
-	}
-}
+svg{font-weight:bold;max-width:600px;height:auto;}
 
 
     </style>
@@ -529,9 +410,31 @@ h2 {
       <div class="content content--intro">
 
         <div class="content__inner">
-          <h1 class="reveal-text">KaFaa</h1>
-          <h3 class="content__subtitle">สั่งออเดอร์ร้านกาแฟ</h3>
-          <a href="#" class="enter">สั่งเลย</a>
+          <svg viewbox="0 0 100 20">
+  <defs>
+    <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="45%" stop-color="#ffe4a0"/>
+      <stop offset="95%" stop-color="#a5740b"/>
+    </linearGradient>
+    <pattern id="wave" x="0" y="0" width="120" height="20" patternUnits="userSpaceOnUse">
+      <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)">
+        <animateTransform
+            attributeName="transform"
+            begin="0s"
+            dur="1.5s"
+            type="translate"
+            from="0,0"
+            to="40,0"
+            repeatCount="indefinite" />
+      </path>
+    </pattern>
+  </defs>
+  <text text-anchor="middle" x="50" y="15" font-size="10" fill="url(#wave)"  fill-opacity="0.6">KAFAA</text>
+  <text text-anchor="middle" x="50" y="15" font-size="10" fill="url(#gradient)" fill-opacity="0.1">KAFAA</text>
+</svg>
+
+          <h3 class="content__subtitle">สั่งออเดอร์กาแฟ</h3>
+          <a href="#" class="">สั่งเลย</a>
 
         </div>
         <div class="shape-wrap">
@@ -799,7 +702,7 @@ espresso.addEventListener(
     drinkmenu.style.display = "flex";
     screen.innerHTML = "เอสเพรสโซ่";
     screen.style.background =
-      "url('img/es.jpg')";
+      "url('img/es.JPG')";
     screen.style.display = "flex";
   },
   false
